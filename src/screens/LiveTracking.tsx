@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { MapPin, Navigation, Phone, Video, Clock, CheckCircle2, PlayCircle } from 'lucide-react';
 
-interface LiveTrackingProps {
-  onNavigate: (screen: string) => void;
-  onBack: () => void;
-}
-
-export function LiveTracking({ onNavigate, onBack }: LiveTrackingProps) {
+export function LiveTracking() {
+  const navigate = useNavigate();
   const [currentStatus, setCurrentStatus] = useState(1);
   const [showVideoModal, setShowVideoModal] = useState(false);
 
@@ -32,7 +29,7 @@ export function LiveTracking({ onNavigate, onBack }: LiveTrackingProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header title="Live Job Tracking" onBack={onBack} />
+      <Header title="Live Job Tracking" onBack={() => navigate(-1)} />
       
       {/* Map View */}
       <div className="h-64 bg-gradient-to-br from-blue-100 to-blue-200 relative overflow-hidden">
@@ -186,7 +183,7 @@ export function LiveTracking({ onNavigate, onBack }: LiveTrackingProps) {
       {/* Fixed Bottom - View Certificate (when completed) */}
       {currentStatus >= 4 && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#F7F9FB] p-4 shadow-lg">
-          <Button fullWidth onClick={() => onNavigate('certificate')}>
+          <Button fullWidth onClick={() => navigate('/certificate')}>
             View Certificate & Complete Service
           </Button>
         </div>

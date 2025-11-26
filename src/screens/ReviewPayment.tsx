@@ -1,16 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { PriceRow } from '../components/PriceRow';
 import { PaymentOption } from '../components/PaymentOption';
 import { Smartphone, Wallet, Banknote, Lock, Tag } from 'lucide-react';
 
-interface ReviewPaymentProps {
-  onNavigate: (screen: string) => void;
-  onBack: () => void;
-}
-
-export function ReviewPayment({ onNavigate, onBack }: ReviewPaymentProps) {
+export function ReviewPayment() {
+  const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState('upi');
   const [promoCode, setPromoCode] = useState('');
   const [promoApplied, setPromoApplied] = useState(false);
@@ -26,7 +23,7 @@ export function ReviewPayment({ onNavigate, onBack }: ReviewPaymentProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header title="Review & Payment" onBack={onBack} />
+      <Header title="Review & Payment" onBack={() => navigate(-1)} />
       
       <div className="p-4 space-y-6 pb-32">
         {/* Booking Summary */}
@@ -145,7 +142,7 @@ export function ReviewPayment({ onNavigate, onBack }: ReviewPaymentProps) {
           <span className="text-[#6B7280]">Total Amount</span>
           <span className="text-2xl font-bold text-[#1976D2]">₹{total.toFixed(2)}</span>
         </div>
-        <Button fullWidth onClick={() => onNavigate('confirmation')}>
+        <Button fullWidth onClick={() => navigate('/confirmation')}>
           {paymentMethod === 'cod' ? 'Confirm Booking' : 'Proceed to Pay'}
         </Button>
       </div>

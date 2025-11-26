@@ -1,14 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { Star, Gift, Calendar, Sparkles } from 'lucide-react';
 
-interface FeedbackProps {
-  onNavigate: (screen: string) => void;
-  onBack: () => void;
-}
-
-export function Feedback({ onNavigate, onBack }: FeedbackProps) {
+export function Feedback() {
+  const navigate = useNavigate();
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -18,7 +15,7 @@ export function Feedback({ onNavigate, onBack }: FeedbackProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header title="Feedback & Tips" onBack={onBack} />
+      <Header title="Feedback & Tips" onBack={() => navigate(-1)} />
       
       <div className="p-4 space-y-6 pb-24">
         {/* Rating Section */}
@@ -172,7 +169,7 @@ export function Feedback({ onNavigate, onBack }: FeedbackProps) {
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#F7F9FB] p-4 shadow-lg">
         <Button 
           fullWidth 
-          onClick={() => onNavigate('home')}
+          onClick={() => navigate('/')}
           disabled={rating === 0}
         >
           Submit Feedback

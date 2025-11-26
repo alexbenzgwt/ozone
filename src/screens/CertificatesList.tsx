@@ -1,13 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { EcoScoreBadge } from '../components/EcoScoreBadge';
 import { Calendar, MapPin, Download, ChevronRight } from 'lucide-react';
 
-interface CertificatesListProps {
-  onNavigate: (screen: string) => void;
-  onBack: () => void;
-}
+export function CertificatesList() {
+  const navigate = useNavigate();
 
-export function CertificatesList({ onNavigate, onBack }: CertificatesListProps) {
   const certificates = [
     {
       id: '#CERT-2024-00847',
@@ -34,7 +32,7 @@ export function CertificatesList({ onNavigate, onBack }: CertificatesListProps) 
 
   return (
     <div className="min-h-screen bg-white">
-      <Header title="My Certificates" onBack={onBack} />
+      <Header title="My Certificates" onBack={() => navigate(-1)} />
       
       <div className="p-4 space-y-4">
         <div className="bg-blue-50 border border-[#1976D2] rounded-xl p-4">
@@ -48,7 +46,7 @@ export function CertificatesList({ onNavigate, onBack }: CertificatesListProps) 
           <div
             key={cert.id}
             className="bg-[#F7F9FB] rounded-xl p-4 hover:shadow-md transition-all cursor-pointer active:scale-98"
-            onClick={() => onNavigate('certificate')}
+            onClick={() => navigate('/certificate')}
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex-1">

@@ -1,17 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { EcoScoreBadge } from '../components/EcoScoreBadge';
 import { Download, Share2, CheckCircle, QrCode, Calendar, User, MapPin } from 'lucide-react';
 
-interface CertificateProps {
-  onNavigate: (screen: string) => void;
-  onBack: () => void;
-}
+export function Certificate() {
+  const navigate = useNavigate();
 
-export function Certificate({ onNavigate, onBack }: CertificateProps) {
   return (
     <div className="min-h-screen bg-white">
-      <Header title="Hygiene Certificate" onBack={onBack} />
+      <Header title="Hygiene Certificate" onBack={() => navigate(-1)} />
       
       <div className="p-4 space-y-6 pb-24">
         {/* Certificate Preview */}
@@ -106,7 +104,7 @@ export function Certificate({ onNavigate, onBack }: CertificateProps) {
             </Button>
           </div>
           
-          <Button fullWidth onClick={() => onNavigate('feedback')}>
+          <Button fullWidth onClick={() => navigate('/feedback')}>
             Continue to Feedback
           </Button>
         </div>

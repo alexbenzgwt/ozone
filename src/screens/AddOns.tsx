@@ -1,15 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { AddOnTile } from '../components/AddOnTile';
 import { Beaker, Sparkles, Zap, ChevronDown } from 'lucide-react';
 
-interface AddOnsProps {
-  onNavigate: (screen: string) => void;
-  onBack: () => void;
-}
-
-export function AddOns({ onNavigate, onBack }: AddOnsProps) {
+export function AddOns() {
+  const navigate = useNavigate();
   const [addOns, setAddOns] = useState({
     quickRefill: false,
     advancedTesting: false,
@@ -54,7 +51,7 @@ export function AddOns({ onNavigate, onBack }: AddOnsProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header title="Add-ons & Compliance" onBack={onBack} />
+      <Header title="Add-ons & Compliance" onBack={() => navigate(-1)} />
       
       <div className="p-4 space-y-6 pb-32">
         <div>
@@ -143,7 +140,7 @@ export function AddOns({ onNavigate, onBack }: AddOnsProps) {
           <span className="text-[#6B7280]">Selected Add-ons</span>
           <span className="font-semibold">₹{totalAddOnsCost}</span>
         </div>
-        <Button fullWidth onClick={() => onNavigate('review')}>
+        <Button fullWidth onClick={() => navigate('/review-payment')}>
           Continue to Payment
         </Button>
       </div>

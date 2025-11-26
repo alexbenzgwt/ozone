@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { CheckCircle2, Phone, MessageCircle, Share2, MapPin, User, Clock } from 'lucide-react';
 
-interface ConfirmationProps {
-  onNavigate: (screen: string) => void;
-}
-
-export function Confirmation({ onNavigate }: ConfirmationProps) {
+export function Confirmation() {
+  const navigate = useNavigate();
   const [showConfetti, setShowConfetti] = useState(true);
 
   useEffect(() => {
@@ -113,7 +111,7 @@ export function Confirmation({ onNavigate }: ConfirmationProps) {
         <div className="space-y-3">
           <Button 
             fullWidth 
-            onClick={() => onNavigate('tracking')}
+            onClick={() => navigate('/live-tracking')}
             icon={<MapPin className="w-5 h-5" />}
           >
             View Live Tracking
@@ -142,7 +140,7 @@ export function Confirmation({ onNavigate }: ConfirmationProps) {
         </div>
 
         {/* Back to Home */}
-        <Button variant="secondary" fullWidth onClick={() => onNavigate('home')}>
+        <Button variant="secondary" fullWidth onClick={() => navigate('/')}>
           Back to Home
         </Button>
       </div>

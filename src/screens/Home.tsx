@@ -3,12 +3,11 @@ import { Button } from '../components/Button';
 import { ContractCard } from '../components/ContractCard';
 import { EcoScoreBadge } from '../components/EcoScoreBadge';
 import { Droplets, FileText, Clock, Headphones, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface HomeProps {
-  onNavigate: (screen: string) => void;
-}
+export function Home() {
+  const navigate = useNavigate();
 
-export function Home({ onNavigate }: HomeProps) {
   return (
     <div className="min-h-screen bg-white">
       <Header showMenu showNotifications />
@@ -23,7 +22,7 @@ export function Home({ onNavigate }: HomeProps) {
             </div>
             <Droplets className="w-12 h-12 text-blue-200" />
           </div>
-          <Button variant="secondary" fullWidth onClick={() => onNavigate('booking')}>
+          <Button variant="secondary" fullWidth onClick={() => navigate('/booking')}>
             Book Now
           </Button>
         </div>
@@ -68,7 +67,7 @@ export function Home({ onNavigate }: HomeProps) {
           <h3 className="mb-3">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-3">
             <button
-              onClick={() => onNavigate('certificates')}
+              onClick={() => navigate('/certificates')}
               className="bg-[#F7F9FB] rounded-xl p-4 hover:shadow-md transition-all active:scale-98 text-left"
             >
               <FileText className="w-6 h-6 text-[#1976D2] mb-2" />

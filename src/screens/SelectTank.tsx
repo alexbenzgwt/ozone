@@ -1,15 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { TimeSlotChip } from '../components/TimeSlotChip';
 import { MapPin, Calendar, Droplet, Ruler } from 'lucide-react';
 
-interface SelectTankProps {
-  onNavigate: (screen: string) => void;
-  onBack: () => void;
-}
-
-export function SelectTank({ onNavigate, onBack }: SelectTankProps) {
+export function SelectTank() {
+  const navigate = useNavigate();
   const [tankType, setTankType] = useState('underground');
   const [tankSize, setTankSize] = useState('5000');
   const [selectedDate, setSelectedDate] = useState('2024-12-15');
@@ -27,7 +24,7 @@ export function SelectTank({ onNavigate, onBack }: SelectTankProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header title="Book Cleaning" onBack={onBack} />
+      <Header title="Book Cleaning" onBack={() => navigate(-1)} />
       
       <div className="p-4 space-y-6 pb-24">
         {/* Tank Type */}
@@ -134,7 +131,7 @@ export function SelectTank({ onNavigate, onBack }: SelectTankProps) {
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#F7F9FB] p-4 shadow-lg">
         <Button 
           fullWidth 
-          onClick={() => onNavigate('addons')}
+          onClick={() => navigate('/add-ons')}
           disabled={!selectedSlot}
         >
           Continue to Add-ons
